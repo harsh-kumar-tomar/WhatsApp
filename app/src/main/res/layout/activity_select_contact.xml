@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.openChat"
+    android:background="#121B22"
+    >
+
+
+
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="#1F2C34"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/backbutton"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:background="@drawable/back_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                android:layout_marginStart="96dp"
+                android:background="@drawable/search"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.533" />
+
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20sp"
+                android:text="Select contact"
+                android:textColor="#fff"
+                android:textSize="20sp"
+                app:layout_constraintStart_toEndOf="@+id/backbutton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textVie2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="111 contacts"
+                android:textColor="#fff"
+                android:textSize="10sp"
+                app:layout_constraintStart_toStartOf="@+id/textView2"
+                app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+    </androidx.appcompat.widget.Toolbar>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recylerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

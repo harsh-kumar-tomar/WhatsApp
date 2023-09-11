@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#121B22"
+    >
+
+
+    <ImageView
+        android:id="@+id/DP"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/chatName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:padding="2sp"
+        android:text="Harsh"
+        android:textColor="#fff"
+        android:textSize="23dp"
+        app:layout_constraintBottom_toBottomOf="@+id/DP"
+        app:layout_constraintStart_toEndOf="@+id/DP"
+        app:layout_constraintTop_toTopOf="@+id/DP"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/latestMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:text="i love you"
+        android:textColor="#899093"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/chatName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/chatName"
+        app:layout_constraintTop_toBottomOf="@+id/chatName" />
+
+    <TextView
+        android:id="@+id/lastmessageDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="29/08/2023"
+        android:textColor="#899093"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chatName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/chatName"
+        app:layout_constraintTop_toTopOf="@+id/chatName" />
+</androidx.constraintlayout.widget.ConstraintLayout>

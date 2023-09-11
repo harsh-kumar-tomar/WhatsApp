@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activities.statusFragment"
+    android:background="#121B22"
+    >
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/DP"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/add_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/chatName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:padding="2sp"
+            android:text="My Status"
+            android:textColor="#fff"
+            android:textSize="23dp"
+            app:layout_constraintBottom_toBottomOf="@+id/DP"
+            app:layout_constraintStart_toEndOf="@+id/DP"
+            app:layout_constraintTop_toTopOf="@+id/DP"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/latestMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:text="Tap to add status update"
+            android:textColor="#899093"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/chatName"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/chatName"
+            app:layout_constraintTop_toBottomOf="@+id/chatName" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/latestMesage"
+
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp"
+        android:paddingLeft="5dp"
+        android:layout_marginStart="10sp"
+        android:text="Viewed updates"
+        android:textAlignment="viewStart"
+        android:textColor="#899093"
+        android:textSize="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

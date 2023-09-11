@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.SignupActivity"
+    android:background="@drawable/wallpaper2"
+    android:orientation="vertical"
+    android:layout_gravity="center"
+    >
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginBottom="100dp"
+
+        android:layout_marginTop="150dp"
+        app:srcCompat="@drawable/whatsapp1" />
+
+    <EditText
+        android:id="@+id/UserName"
+        android:layout_width="282dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/white_background"
+        android:fontFamily="@font/varela_font"
+        android:hint="Your Name."
+        android:padding="10dp" />
+
+    <EditText
+        android:id="@+id/UserEmail"
+        android:layout_width="282dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+
+        android:layout_gravity="center"
+        android:hint="Enter Email.."
+        android:fontFamily="@font/varela_font"
+
+
+        android:background="@drawable/white_background"
+
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/UserPassword"
+        android:layout_width="282dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+
+        android:layout_gravity="center"
+        android:hint="Enter Password..."
+        android:fontFamily="@font/varela_font"
+
+        android:background="@drawable/white_background"
+
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/alreadyHaveaAcc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="end"
+        android:textColor="#fff"
+        android:text="Already hava a account ?" />
+
+    <Button
+        android:id="@+id/SignUp"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/green_background"
+        android:layout_gravity="center"
+        android:text="Sign Up"
+        android:fontFamily="@font/varela_font"
+        android:textColor="#fff"
+        />
+
+    <Button
+        android:id="@+id/GoogleSignUp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:padding="5dp"
+        android:background="@drawable/white_background"
+        android:drawableLeft="@drawable/google_icon"
+        android:layout_gravity="center"
+        android:text="  Google"
+
+        android:fontFamily="@font/varela_font"
+        android:textColor="#000"
+        />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_marginTop="10dp"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

@@ -3,6 +3,7 @@ package com.example.javaappversion13.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,25 +43,10 @@ public class chatFragment extends Fragment {
 
         ArrayList<structChatView> dataStream = new ArrayList<>();
 
-        dataStream.add(new structChatView(R.drawable.profile1, "Aries", "so when are you coming ?", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile2, "Thor", "i am son of odin", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile3, "Hemdall", "in your service", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile2, "Hela", "i am goddess", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile5, "kusboo", "good", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile6, "Yulgar", "i am a journalist", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile7, "kanata", "if you stand , you are on your feet", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile8, "light", "tommarrow is exam", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile1, "L", "light is studying", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile2, "Bruce wayne", "do you bleed", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile3, "CLark", "save martha", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile4, "billi", "shazam", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile5, "Tenth Adam", "send them all", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile6, "Hawk Man", "where are you atom smasher ?", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile7, "Dr. Fate", "kneel or die", "Yesterday"));
-        dataStream.add(new structChatView(R.drawable.profile8, "Tony", "tomarrow is party", "Yesterday"));
-
 
         RecyclerView recyclerView = view.findViewById(R.id.recylerView);
+//        ViewCompat.setNestedScrollingEnabled(recyclerView, false);
+
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireContext());
 

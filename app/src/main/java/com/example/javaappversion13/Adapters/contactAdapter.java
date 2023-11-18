@@ -1,5 +1,6 @@
 package com.example.javaappversion13.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,18 +11,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.javaappversion13.Domain.structContactView;
+import com.example.javaappversion13.Domain.structUser;
 import com.example.javaappversion13.R;
 
 import java.util.ArrayList;
 
 public class contactAdapter extends RecyclerView.Adapter<contactAdapter.ContactViewHolder> {
 
-    ArrayList <structContactView> dataList ;
+    ArrayList <structUser> dataList ;
     contactAdapter.OnItemClickListener onItemClickListener ;
     Context context ;
 
-    public contactAdapter(ArrayList<structContactView> dataList, Context context) {
+    public contactAdapter(ArrayList<structUser> dataList, Context context) {
         this.dataList = dataList;
         this.context = context;
     }
@@ -44,11 +47,17 @@ public class contactAdapter extends RecyclerView.Adapter<contactAdapter.ContactV
     }
 
     @Override
-    public void onBindViewHolder(@NonNull contactAdapter.ContactViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull contactAdapter.ContactViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        holder.profileImage.setImageResource(dataList.get(position).getProfileImage());
-        holder.profileName.setText(dataList.get(position).getProfileName());
-        holder.profileDescription.setText(dataList.get(position).getProfileDescription());
+
+
+        Glide.with(context)
+                .load(dataList.get(position).getUserProfilePicPath())
+                .centerCrop()
+                .into(holder.profileImage);
+
+        holder.profileName.setText(dataList.get(position).getUserName());
+//        holder.profileDescription.setText(dataList.get(position).getProfileDescription());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,7 +87,7 @@ public class contactAdapter extends RecyclerView.Adapter<contactAdapter.ContactV
 
             profileImage = itemView.findViewById(R.id.DP);
 
-            profileDescription = itemView.findViewById(R.id.profileMessage);
+//            profileDescription = itemView.findViewById(R.id.profileMessage);
             profileName = itemView.findViewById(R.id.profileName);
 
 

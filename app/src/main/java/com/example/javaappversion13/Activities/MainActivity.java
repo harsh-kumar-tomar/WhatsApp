@@ -1,12 +1,5 @@
 package com.example.javaappversion13.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -16,18 +9,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
-import com.example.javaappversion13.Adapters.chatAdapter;
-import com.example.javaappversion13.R;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+import androidx.viewpager2.widget.ViewPager2;
+
 import com.example.javaappversion13.Adapters.ViewPagerAdapter;
-import com.example.javaappversion13.Domain.structChatView;
+import com.example.javaappversion13.R;
 import com.example.javaappversion13.databinding.ActivityMainBinding;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.ktx.Firebase;
-
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout ;
@@ -43,17 +35,12 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        auth = FirebaseAuth.getInstance();
-
-
         intialize();
-        Window window = getWindow();
-        window.setStatusBarColor(Color.parseColor("#1F2C34"));
 
         ViewPager2 viewPager = findViewById(R.id.viewPager2);
         ViewPagerAdapter adapter = new ViewPagerAdapter(this);
         viewPager.setAdapter(adapter);
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
+
         new TabLayoutMediator(tabLayout, viewPager, (tab, position) -> {
             switch (position) {
                 case 0:
@@ -69,21 +56,11 @@ public class MainActivity extends AppCompatActivity {
         }).attach();
 
 
-
-
-
-
-
-
-
-
         selectContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(MainActivity.this , selectContact.class);
-
-
                 startActivity(intent);
 
             }
@@ -97,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
 
 
         selectContacts=findViewById(R.id.selectContact);
+        tabLayout = findViewById(R.id.tabLayout);
+
+        auth = FirebaseAuth.getInstance();
+
+        Window window = getWindow();
+        window.setStatusBarColor(Color.parseColor("#360263"));
+
     }
 
     @Override

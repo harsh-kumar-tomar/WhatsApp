@@ -1,51 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent">
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
 
-    android:background="#121B22"
+    android:background="#21023C"
     android:orientation="vertical"
     tools:context=".Activities.chatFragment">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:nestedScrollingEnabled="false" />
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recylerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="30dp"
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="150dp"
+            android:gravity="center_horizontal"
             app:layout_constraintTop_toBottomOf="@+id/recylerView">
 
 
             <ImageView
-                android:id="@+id/imageView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="50dp"
+                android:id="@+id/imageView643"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_gravity="center_vertical"
                 android:src="@drawable/baseline_lock_24" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your meassages are "
+                android:text="Your personal messages are "
+                android:textSize="12dp"
+                android:layout_gravity="center_vertical"
+
                 android:layout_marginStart="2dp"
-                android:layout_marginTop="4dp"
                 android:textColor="#66757F" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="end-to-end encrypted"
-                android:layout_marginTop="4dp"
+                android:textSize="12dp"
+                android:layout_gravity="center_vertical"
+
 
                 android:textColor="#1B8871" />
 
@@ -55,7 +66,6 @@
 
 
 
-
-
 </LinearLayout>
 
+</androidx.core.widget.NestedScrollView>

@@ -6,8 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.openChat"
-    android:background="#121B22"
+    tools:context=".Activities.selectContact"
+    android:background="#21023C"
     >
 
 
@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="#1F2C34"
+        android:background="#360263"
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -65,7 +65,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textVie2"
+                android:id="@+id/noofContacts"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="111 contacts"
@@ -83,12 +83,22 @@
     </androidx.appcompat.widget.Toolbar>
 
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recylerView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
 
 

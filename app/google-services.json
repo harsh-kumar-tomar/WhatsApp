@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "1059670148068",
+    "firebase_url": "https://whatsapp-harsh-kumar-tomar-default-rtdb.firebaseio.com",
     "project_id": "whatsapp-harsh-kumar-tomar",
     "storage_bucket": "whatsapp-harsh-kumar-tomar.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.javaappversion13"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1059670148068-gb9jlclfncvp2di4r30usbihadoegke2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.javaappversion13",
+            "certificate_hash": "b76d14c87f39f2f3208c5381cae126271aa590eb"
+          }
+        },
+        {
+          "client_id": "1059670148068-u4c69tvmsnpjcb9l94d55gppr2dojfkt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDsfkCoPswGOgZSZzFVUz3BnQL0sWPFxFM"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059670148068-u4c69tvmsnpjcb9l94d55gppr2dojfkt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

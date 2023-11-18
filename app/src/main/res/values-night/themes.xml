@@ -5,5 +5,27 @@
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
         <item name="android:windowBackground">@android:color/black</item>
 
-    </style>>
+    </style>
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@layout/activity_splash_screen</item>
+    </style>
+
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- Set the splash screen background, animated icon, and animation duration. -->
+        <item name="windowSplashScreenBackground">@android:color/transparent</item>
+
+        <item name="windowSplashScreenAnimationDuration">50</item>
+
+        <!-- Set the theme of the Activity that directly follows your splash screen. -->
+        <!-- Required -->
+        <item name="postSplashScreenTheme">@style/Theme.Javaappversion13</item>
+    </style>
+
+    <style name="Purple.Theme" parent="Base.Theme.Javaappversion13">
+
+        <item name="backgroundColor">@color/purple_background</item>
+        <item name="tabBackground">@color/purple_tab_background</item>
+
+    </style>
+
 </resources>

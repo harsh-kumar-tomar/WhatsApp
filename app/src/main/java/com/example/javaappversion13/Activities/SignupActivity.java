@@ -26,18 +26,16 @@ public class SignupActivity extends AppCompatActivity {
     ActivitySignupBinding binding;
     private FirebaseAuth auth;
     FirebaseDatabase database;
-
     ProgressBar progressBar ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivitySignupBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Window window = getWindow();
         window.setStatusBarColor(Color.parseColor("#121B22"));
-
-        binding = ActivitySignupBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
 
 
         auth = FirebaseAuth.getInstance();
@@ -51,36 +49,38 @@ public class SignupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                progressBar.setVisibility(View.VISIBLE);
-                auth
-                        .createUserWithEmailAndPassword(binding.UserEmail.getText().toString() , binding.UserPassword.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!binding.UserName.getText().toString().equals("") && !binding.UserEmail.getText().toString().equals("") && !binding.UserPassword.getText().toString().equals(""))
+                {
 
-                        progressBar.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    auth.createUserWithEmailAndPassword(binding.UserEmail.getText().toString() , binding.UserPassword.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                        if(task.isSuccessful())
-                        {
+                                    progressBar.setVisibility(View.INVISIBLE);
 
-                            structUser user = new structUser(binding.UserName.getText().toString() ,
-                                    binding.UserEmail.getText().toString() ,
-                                    binding.UserPassword.getText().toString());
+                                    if(task.isSuccessful())
+                                    {
 
-                            String id = task.getResult().getUser().getUid();
+                                        structUser user = new structUser(binding.UserName.getText().toString() , binding.UserEmail.getText().toString() , binding.UserPassword.getText().toString());
+                                        String id = task.getResult().getUser().getUid();
+                                        database.getReference().child("Users").child(id).setValue(user);
+                                        Toast.makeText( getApplicationContext() , "User registered Successfully" , Toast.LENGTH_SHORT).show();
+                                    }else {
 
-                            database.getReference().child("Users").child(id).setValue(user);
+                                        Toast.makeText( getApplicationContext() , "Unable to make account" , Toast.LENGTH_SHORT).show();
 
-                            Toast.makeText( getApplicationContext() , "User registered Successfully" , Toast.LENGTH_SHORT).show();
-                        }else {
+                                    }
 
-                            Toast.makeText( getApplicationContext() , task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                                }
+                            });
 
-                        }
+                }else {
+                    progressBar.setVisibility(View.INVISIBLE);
+                    Toast.makeText(SignupActivity.this, "Empty User details", Toast.LENGTH_SHORT).show();
 
-                    }
-                });
-
+                }
 
             }
 
@@ -90,9 +90,7 @@ public class SignupActivity extends AppCompatActivity {
         binding.alreadyHaveaAcc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext() , LoginActivity.class);
-
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext() , LoginActivity.class));
                 overridePendingTransition(R.anim.activity_entering_animation,  R.anim.activity_exiting_animation);
 
                 finish();

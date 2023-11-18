@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.Javaappversion13" parent="Base.Theme.Javaappversion13" />
+
+    <style name="Purple.Theme" parent="Base.Theme.Javaappversion13">
+
+        <item name="backgroundColor">@color/purple_background</item>
+        <item name="tabBackground">@color/purple_tab_background</item>
+
+    </style>
 </resources>

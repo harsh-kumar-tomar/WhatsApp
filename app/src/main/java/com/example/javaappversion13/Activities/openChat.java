@@ -8,36 +8,38 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.javaappversion13.Adapters.messageAdapter;
 import com.example.javaappversion13.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class openChat extends AppCompatActivity {
     EditText enterMessage ;
     ImageView enter_to_microphone;
     RecyclerView recyclerView ;
     messageAdapter messageAdapter ;
-    List<String> messages = new ArrayList<>() ;             //list of messages
+    List<String> messagesList = new ArrayList<>() ;             //list of messages
 
+    FirebaseAuth auth ;
 
     ImageView backbutton ;
     Toolbar toolbar ;
@@ -49,23 +51,40 @@ public class openChat extends AppCompatActivity {
         Window window = getWindow();
         window.setStatusBarColor(Color.parseColor("#1F2C34"));
 
-        Animation bounceOutAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_out);
-        Animation bounceBackAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_back);
+//        Animation bounceOutAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_out);
+//        Animation bounceBackAnimation = AnimationUtils.loadAnimation(this, R.anim.bounce_back);
+
+
 
         intialize();
 
-        int imageResourceId = getIntent().getIntExtra("imageResourceId", 0);
+        //setting Chat profile image
+        String imageResourceId = getIntent().getStringExtra("imageResourceId");
         ImageView imageView = findViewById(R.id.DP); // Replace with your ImageView ID
-        imageView.setImageResource(imageResourceId);
 
+        Glide.with(getApplicationContext())
+                .load(imageResourceId)
+                .centerCrop()
+                .into(imageView);
+
+        //setting Chat profile Name
         String name = getIntent().getStringExtra("profileName");
         TextView profileName = findViewById(R.id.profileName);
         profileName.setText(name);
 
+        //setting Chat Receiver UID and Sender UID
+        String RECEIVER_UID = getIntent().getStringExtra("uid");
+        auth = FirebaseAuth.getInstance();
+        String SENDER_UID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+
+
+        Toast.makeText(this, ""+RECEIVER_UID, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, ""+SENDER_UID, Toast.LENGTH_SHORT).show();
 
 
 
-        messages.add("hello");
+
+        messagesList.add("hello");
 
         enterMessage.addTextChangedListener(new TextWatcher() {
             @Override
@@ -82,28 +101,21 @@ public class openChat extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
 
-
-
             }
         });//this is changing microphone to enter
 
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 finish();
             }
         });//this is setting the back button
 
 
 
-        messageAdapter = new messageAdapter(messages) ;
-
+        messageAdapter = new messageAdapter(messagesList) ;
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext() );
-
         recyclerView.setLayoutManager(linearLayoutManager);
-
         recyclerView.setAdapter(messageAdapter);
 
         enter_to_microphone.setOnClickListener(new View.OnClickListener() {
@@ -120,11 +132,11 @@ public class openChat extends AppCompatActivity {
     {
         String messageText = enterMessage.getText().toString();
         if (!messageText.isEmpty()) {
-            messages.add(messageText);
+            messagesList.add(messageText);
             messageAdapter.notifyDataSetChanged();
             enterMessage.setText("");
             // Scroll to the last message
-            recyclerView.smoothScrollToPosition(messages.size() - 1);
+            recyclerView.smoothScrollToPosition(messagesList.size() - 1);
         }
 
     }

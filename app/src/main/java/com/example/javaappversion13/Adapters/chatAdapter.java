@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.javaappversion13.R;
@@ -16,7 +17,8 @@ import java.util.ArrayList;
 
 public class chatAdapter extends RecyclerView.Adapter<chatAdapter.myViewHolder> {
      ArrayList<structChatView> datalist ;
-     OnItemClickListener onItemClickListener ;
+
+    OnItemClickListener onItemClickListener ;
      Context context;
 
     public chatAdapter(Context context, ArrayList<structChatView> datalist)
@@ -49,16 +51,16 @@ public class chatAdapter extends RecyclerView.Adapter<chatAdapter.myViewHolder> 
 
     public void onBindViewHolder( myViewHolder holder, int position) {
 
-        holder.img.setImageResource(datalist.get(position).getProfileImage());
-        holder.name.setText(datalist.get(position).getProfileName());
-        holder.lastmesaage.setText(datalist.get(position).getProfileLastMessage());
-        holder.date.setText(datalist.get(position).getProfileLastSeen());
+        holder.img.setImageResource(datalist.get(holder.getAdapterPosition()).getProfileImage());
+        holder.name.setText(datalist.get(holder.getAdapterPosition()).getProfileName());
+        holder.lastmesaage.setText(datalist.get(holder.getAdapterPosition()).getProfileLastMessage());
+        holder.date.setText(datalist.get(holder.getAdapterPosition()).getProfileLastSeen());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position);
+                    onItemClickListener.onItemClick(holder.getAdapterPosition());
                 }
             }
         });

@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="purple_background">#21023C</color>
+    <color name="purple_tab_background">#360263</color>
 </resources>

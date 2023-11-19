@@ -24,6 +24,7 @@ import com.example.javaappversion13.Adapters.contactAdapter;
 import com.example.javaappversion13.Domain.structContactView;
 import com.example.javaappversion13.Domain.structUser;
 import com.example.javaappversion13.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +39,7 @@ public class selectContact extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressBar progressBar;
     TextView noofContacts;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,12 +91,18 @@ public class selectContact extends AppCompatActivity {
                 dataitems.clear();
                 for (DataSnapshot a : snapshot.getChildren())
                 {
+                    if (a.getKey().equals(auth.getUid()))
+                    {
+                        continue;
+                    }
                     structUser user = new structUser();
                     user = a.getValue(structUser.class);
 
+
+
                     assert user != null;
                     user.setUserId(a.getKey());
-                    Toast.makeText(selectContact.this, ""+a.getKey(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(selectContact.this, ""+a.getKey(), Toast.LENGTH_SHORT).show();
 
                     dataitems.add(user);
                     adapter.notifyDataSetChanged();

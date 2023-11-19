@@ -20,7 +20,7 @@
         android:textAlignment="viewEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:tabBackground="@drawable/tab_background"
         app:tabIndicatorColor="#fff"
         app:tabIndicatorFullWidth="true"
@@ -30,8 +30,8 @@
 
 
 
-    <Toolbar
-        android:id="@+id/toolbar2"
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/tab_background"
@@ -49,7 +49,7 @@
 
             />
 
-    </Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <androidx.viewpager2.widget.ViewPager2

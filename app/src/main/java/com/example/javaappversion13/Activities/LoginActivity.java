@@ -3,6 +3,7 @@ package com.example.javaappversion13.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.graphics.Color;
@@ -37,7 +38,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.Nullable;
 
 public class LoginActivity extends AppCompatActivity {
@@ -180,6 +185,7 @@ public class LoginActivity extends AppCompatActivity {
 
             } catch (ApiException e) {
 
+                Toast.makeText(this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
             }
 
         }
@@ -197,31 +203,41 @@ public class LoginActivity extends AppCompatActivity {
                 // Check condition
                 if (task.isSuccessful()) {
                     // When task is successful redirect to profile activity display Toast
-                    FirebaseUser user = auth.getCurrentUser();
+                    FirebaseUser user = auth.getCurrentUser();//current user
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-
                     String id = task.getResult().getUser().getUid();
-                    structUser u = new structUser("null" , user.getDisplayName() , user.getEmail() , "null" , id);
 
-                    database.getReference().child("Users").child(id).setValue(u);
+                    database.getReference().child("Users").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (!snapshot.exists())
+                            {
+                                structUser u = new structUser("null" , user.getDisplayName() , user.getEmail() , "null" , id);
+                                database.getReference().child("Users").child(id).setValue(u);
+                                Toast.makeText( getApplicationContext() , "Congratulations! You registered Successfully" , Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this , MainActivity.class));
+                                finish();
+                            }else {
+                                Toast.makeText( getApplicationContext() , "Welcome"+auth.getCurrentUser().getDisplayName() , Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(LoginActivity.this , MainActivity.class));
+                                finish();
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
+                        }
+                    });
 
-
-
-
-                    binding.progressBar.setVisibility(View.INVISIBLE);
-                    Toast.makeText( getApplicationContext() , "User registered Successfully" , Toast.LENGTH_SHORT).show();
-
-                    Intent intent = new Intent(LoginActivity.this , MainActivity.class);
-                    Toast.makeText(getApplicationContext(),"Sign in with Google",Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
                 } else {
                     // When task is unsuccessful display Toast
                 }
             }
 
         });
+
+
     }
     }
 

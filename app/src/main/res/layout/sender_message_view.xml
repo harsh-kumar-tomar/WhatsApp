@@ -3,42 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10sp"
     android:layout_marginBottom="10sp"
     app:layout_constraintTop_toTopOf="parent"
 
     tools:layout_editor_absoluteX="60dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+
+        android:layout_marginTop="2dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:maxWidth="350dp"
         android:layout_marginEnd="20dp"
-
-
+        android:maxWidth="350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/senderMessage"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             android:background="@drawable/sender_message_background"
+            android:fontFamily="@font/comfortaa_font"
+
+
             android:lineSpacingExtra="4dp"
-
-
             android:maxWidth="350dp"
             android:padding="10sp"
             android:text="The curious cat explored the garden, sniffing the colorful flowers and chasing butterflies.
 The curious cat explored the garden, sniffing the colorful flowers and chasing butterflies.
 The curious cat explored the garden, sniffing the colorful flowers and chasing butterflies.
 The curious cat explored the garden, sniffing the colorful flowers and chasing butterflies."
+            android:textAlignment="viewEnd"
             android:textColor="#fff"
             android:textSize="15sp"
-            android:textAlignment="viewEnd"
-            android:fontFamily="@font/comfortaa_font"
 
 
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,33 +48,33 @@ The curious cat explored the garden, sniffing the colorful flowers and chasing b
 
         </TextView>
 
-        <TextView
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <TextView
             android:id="@+id/senderTimeStamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:layout_marginEnd="44dp"
+
             android:text="11:32 pm"
             android:textColor="#86BAB3"
             android:textSize="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/messagetxtView"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="8dp"
-            app:layout_constraintBottom_toBottomOf="@+id/data_time_TV"
-            app:layout_constraintStart_toEndOf="@+id/data_time_TV"
-            app:layout_constraintTop_toTopOf="@+id/data_time_TV"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/baseline_check_circle_24" />
+        <!--        <ImageView-->
+        <!--            android:id="@+id/imageView2"-->
+        <!--            android:layout_width="15dp"-->
+        <!--            android:layout_height="15dp"-->
+        <!--            android:layout_marginStart="8dp"-->
+        <!--            app:layout_constraintBottom_toBottomOf="@+id/data_time_TV"-->
+        <!--            app:layout_constraintStart_toEndOf="@+id/data_time_TV"-->
+        <!--            app:layout_constraintTop_toTopOf="@+id/data_time_TV"-->
+        <!--            app:layout_constraintVertical_bias="0.0"-->
+        <!--            app:srcCompat="@drawable/baseline_check_circle_24" />-->
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 

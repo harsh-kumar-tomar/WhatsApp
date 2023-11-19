@@ -1,5 +1,6 @@
 package com.example.javaappversion13.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.appcompat.widget.Toolbar;
@@ -22,24 +23,35 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.javaappversion13.Adapters.messageAdapter;
+import com.example.javaappversion13.Domain.ChatAdapter;
+import com.example.javaappversion13.Domain.MessageModel;
 import com.example.javaappversion13.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.ktx.Firebase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.Objects;
 
 public class openChat extends AppCompatActivity {
     EditText enterMessage ;
     ImageView enter_to_microphone;
     RecyclerView recyclerView ;
-    messageAdapter messageAdapter ;
-    List<String> messagesList = new ArrayList<>() ;             //list of messages
 
+    ChatAdapter adapter;
+    ArrayList<MessageModel> messageModelArrayList= new ArrayList<>();
     FirebaseAuth auth ;
+    FirebaseDatabase root;
+
 
     ImageView backbutton ;
     Toolbar toolbar ;
@@ -64,6 +76,7 @@ public class openChat extends AppCompatActivity {
 
         Glide.with(getApplicationContext())
                 .load(imageResourceId)
+                .placeholder(R.drawable.user_icon)
                 .centerCrop()
                 .into(imageView);
 
@@ -73,18 +86,60 @@ public class openChat extends AppCompatActivity {
         profileName.setText(name);
 
         //setting Chat Receiver UID and Sender UID
-        String RECEIVER_UID = getIntent().getStringExtra("uid");
+        final String RECEIVER_UID = getIntent().getStringExtra("uid");
         auth = FirebaseAuth.getInstance();
-        String SENDER_UID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
+        final String SENDER_UID = Objects.requireNonNull(auth.getCurrentUser()).getUid();
 
-
-        Toast.makeText(this, ""+RECEIVER_UID, Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, ""+SENDER_UID, Toast.LENGTH_SHORT).show();
-
+        root = FirebaseDatabase.getInstance();
 
 
 
-        messagesList.add("hello");
+
+
+
+
+        //setting up adapter
+
+        adapter = new ChatAdapter(getApplicationContext() , messageModelArrayList) ;
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext() );
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+
+
+
+        root.getReference("Users")
+                        .child(SENDER_UID)
+                                .child("Chats")
+                                        .child(RECEIVER_UID)
+                                                .addValueEventListener(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        messageModelArrayList.clear();
+                                                        for (DataSnapshot a : snapshot.getChildren())
+                                                        {
+                                                            MessageModel messageModel = a.getValue(MessageModel.class);
+                                                            messageModelArrayList.add(messageModel);
+                                                        }
+                                                        adapter.notifyDataSetChanged();
+
+                                                        if((messageModelArrayList.size()-1) > 0)
+                                                        {
+                                                            recyclerView.smoothScrollToPosition(messageModelArrayList.size() - 1);
+
+                                                        }
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
+
+
+
+
 
         enterMessage.addTextChangedListener(new TextWatcher() {
             @Override
@@ -111,17 +166,50 @@ public class openChat extends AppCompatActivity {
             }
         });//this is setting the back button
 
-
-
-        messageAdapter = new messageAdapter(messagesList) ;
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext() );
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(messageAdapter);
-
         enter_to_microphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendMessage();
+                String messageText = enterMessage.getText().toString();
+
+                if (!messageText.isEmpty()) {
+
+                    MessageModel messageModel = new MessageModel(messageText ,SENDER_UID ,getCurrentTime());
+
+                    root.getReference("Users")
+                            .child(SENDER_UID)
+                            .child("Chats")
+                            .child(RECEIVER_UID)
+                            .push()
+                                    .setValue(messageModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                    root.getReference("Users")
+                                            .child(RECEIVER_UID)
+                                            .child("Chats")
+                                            .child(SENDER_UID)
+                                            .push()
+                                            .setValue(messageModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+
+                                                }
+                                            });
+                                }
+                            });
+
+//                    adapter.notifyDataSetChanged();
+                    enterMessage.setText("");
+                    // Scroll to the last message
+
+
+                    if(messageModelArrayList.size()-1 > 0)
+                    {
+                        recyclerView.smoothScrollToPosition(messageModelArrayList.size() - 1);
+
+                    }
+
+                }
             }
         });
 
@@ -130,16 +218,33 @@ public class openChat extends AppCompatActivity {
 
     public void sendMessage()
     {
-        String messageText = enterMessage.getText().toString();
-        if (!messageText.isEmpty()) {
-            messagesList.add(messageText);
-            messageAdapter.notifyDataSetChanged();
-            enterMessage.setText("");
-            // Scroll to the last message
-            recyclerView.smoothScrollToPosition(messagesList.size() - 1);
-        }
+
 
     }
+
+    private String getCurrentTime() {
+        // Get the current time
+        Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        int amPm = calendar.get(Calendar.AM_PM);
+
+        // Convert to 12-hour format
+        String amPmString = (amPm == Calendar.AM) ? "AM" : "PM";
+
+        // Adjust the hour to be in the range of 1 to 12 for 12-hour format
+        if (hour == 0) {
+            hour = 12;
+        }
+
+        // Format the time as "hh:mm AM/PM"
+
+        // Now, formattedTime contains the current time in 12-hour format (hh:mm AM/PM)
+        // You can use it as needed
+
+        return String.format(Locale.getDefault(), "%02d:%02d %s", hour, minute, amPmString);
+    }
+
 
     void enter_to_microphoneFunction ()
     {

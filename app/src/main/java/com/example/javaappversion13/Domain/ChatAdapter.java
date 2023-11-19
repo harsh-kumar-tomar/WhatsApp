@@ -22,6 +22,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
     final private int VIEW_TYPE_SENDER = 1;
     final private int VIEW_TYPE_RECEIVER = 2;
+    final String SENDER_UID = FirebaseAuth.getInstance().getUid();
 
 
     public ChatAdapter(Context context, ArrayList<MessageModel> messageModelArrayList) {
@@ -32,7 +33,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
 
-        if (Objects.equals(messageModelArrayList.get(position).getUID(), FirebaseAuth.getInstance().getUid()))
+        if (Objects.equals(messageModelArrayList.get(position).getUID(), SENDER_UID ))
         {
             return VIEW_TYPE_SENDER;
         }else {
@@ -48,7 +49,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         if (viewType == VIEW_TYPE_SENDER)
         {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.sender_message_view, parent , false);
-            return new ReceiverViewholder(view);
+            return new SenderViewholder(view);
 
         }else {
 
@@ -62,7 +63,20 @@ public class ChatAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-        
+        MessageModel messageModel = messageModelArrayList.get(position);
+
+        if (holder.getClass() == SenderViewholder.class)
+        {
+            ((SenderViewholder) holder).senderMessage.setText(messageModel.getMessage());
+            ((SenderViewholder) holder).senderTimeStamp.setText(messageModel.getTimeStamp());
+
+        }else {
+
+            ((ReceiverViewholder)holder).receiverMessage.setText(messageModel.getMessage());
+            ((ReceiverViewholder)holder).receiverTimeStamp.setText(messageModel.getTimeStamp());
+        }
+
+
 
     }
 

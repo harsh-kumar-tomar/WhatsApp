@@ -9,7 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
@@ -75,8 +77,13 @@ public class MainActivity extends AppCompatActivity {
 
         selectContacts=findViewById(R.id.selectContact);
         tabLayout = findViewById(R.id.tabLayout);
-
         auth = FirebaseAuth.getInstance();
+
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         Window window = getWindow();
         window.setStatusBarColor(Color.parseColor("#360263"));
@@ -102,8 +109,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (itemId == R.id.OptionNewGroup) {
         } else if (itemId == R.id.OptionLogout) {
             auth.signOut();
-            Intent intent = new Intent(getApplicationContext(), SignupActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
             finish();
         }
 

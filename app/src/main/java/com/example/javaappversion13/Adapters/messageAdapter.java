@@ -34,8 +34,8 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.customVi
     @Override
     public void onBindViewHolder(@NonNull customViewHolder holder, int position) {
 
-        holder.bind(messages.get(position));
-        holder.data_time_TV.setText(getCurrentTime());
+//        holder.bind(messages.get(position));
+//        holder.data_time_TV.setText(getCurrentTime());
 
 
     }
@@ -50,8 +50,8 @@ public class messageAdapter extends RecyclerView.Adapter<messageAdapter.customVi
         TextView data_time_TV ;
         public customViewHolder( View itemView) {
             super(itemView);
-            messagetxtView = itemView.findViewById(R.id.messagetxtView);
-            data_time_TV = itemView.findViewById(R.id.data_time_TV);
+//            messagetxtView = itemView.findViewById(R.id.messagetxtView);
+//            data_time_TV = itemView.findViewById(R.id.data_time_TV);
 
         }
         public void bind(String message)

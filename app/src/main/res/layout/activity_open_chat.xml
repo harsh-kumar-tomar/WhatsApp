@@ -69,11 +69,15 @@
             <TextView
                 android:id="@+id/profileName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:layout_marginStart="12dp"
                 android:text="TextView"
                 android:textColor="#fff"
                 android:textSize="20sp"
+
+                android:maxWidth="130dp"
+                android:ellipsize="end"
+
                 android:fontFamily="@font/comfortaa_font"
                 app:layout_constraintBottom_toBottomOf="@+id/DP"
                 app:layout_constraintStart_toEndOf="@+id/DP"

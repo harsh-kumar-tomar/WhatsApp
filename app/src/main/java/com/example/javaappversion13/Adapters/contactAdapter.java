@@ -53,6 +53,7 @@ public class contactAdapter extends RecyclerView.Adapter<contactAdapter.ContactV
 
         Glide.with(context)
                 .load(dataList.get(position).getUserProfilePicPath())
+                .placeholder(R.drawable.user_icon)
                 .centerCrop()
                 .into(holder.profileImage);
 
